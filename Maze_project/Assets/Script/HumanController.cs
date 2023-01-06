@@ -6,10 +6,12 @@ public class HumanController : MonoBehaviour
 {
     Animator animator;
     public float moveForce = 1000;
+
+    private GameObject camara;
     // Start is called before the first frame update
     void Start()
     {
-        
+        camara = GameObject.Find("Main Camera");
     }
 
     // Update is called once per frame
