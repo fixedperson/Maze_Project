@@ -44,4 +44,21 @@ public class HumanController : MonoBehaviour
             transform.Translate(transform.right * Time.deltaTime);
         }
     }
+        public void Shoot(Vector3 dir)
+    {
+        GetComponent<Rigidbody>().AddForce(dir);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.name);
+        if (collision.gameObject.name == "wall")
+        {
+            GetComponent<Rigidbody>().isKinematic = true;
+
+            Destroy(collision.gameObject);
+            //원 OnCollisionEnter의 메소드 오버라이딩 하는 방식임 
+            //Rigidbody 자체가 갖고 있는 것 
+            GetComponent<ParticleSystem>().Play();
+        }
+    }
 }
