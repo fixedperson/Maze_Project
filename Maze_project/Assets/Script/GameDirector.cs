@@ -23,6 +23,11 @@ public class GameDirector : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         Debug.Log("enter");
+        if(collision.gameObject.tag == "end")
         SceneManager.LoadScene("ClearScene");
+        else
+        {
+            Debug.Log(collision.gameObject.name);
+        }
     }
 }
