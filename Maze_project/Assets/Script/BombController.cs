@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
+    public GameObject bombPrefab;
     // Start is called before the first frame update
     void Start()
     {
