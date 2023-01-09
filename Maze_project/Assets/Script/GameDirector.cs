@@ -8,8 +8,8 @@ public class GameDirector : MonoBehaviour
 {
     public GameObject timerText;
     public GameObject pointText;
-    public float time = 0f;
-    public int point = 10000;
+    public static float time = 0f;
+    public static int point = 10000;
     
     // Start is called before the first frame update
     void Start()
@@ -21,9 +21,9 @@ public class GameDirector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.time += Time.deltaTime;
-        this.timerText.GetComponent<TextMeshProUGUI>().text = this.time.ToString("F1");
-        this.pointText.GetComponent<TextMeshProUGUI>().text = this.point.ToString();  
+        time += Time.deltaTime;
+        this.timerText.GetComponent<TextMeshProUGUI>().text = time.ToString("F1");
+        this.pointText.GetComponent<TextMeshProUGUI>().text = point.ToString();  
     }
 
     public void DesPoint()
