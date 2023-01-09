@@ -9,11 +9,13 @@ public class HumanController : MonoBehaviour
     
     public float walkSpeed;
     public float cameraRotationLimit;
-    public Camera theCamera; 
+    public Camera theCamera;
+    public Camera topCamera;
     
     private float cameraRotation;
     private Rigidbody rigidbody;
-    
+    public GameObject bombPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,8 +28,28 @@ public class HumanController : MonoBehaviour
         Move();
         CameraRotation();
         CharacterRotation();
-        
+        GetComponent<Animator>().SetBool("throw", false);
         Animation();
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            Debug.Log("Launch the bomb");
+            GameObject bomb = Instantiate(bombPrefab);
+            bomb.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 1.0f ;
+            
+            GetComponent<Animator>().SetBool("throw", true);
+
+            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Vector3 direction = ray.direction;
+            마우스 커서 방향으로 던지는 것 (Throw the mouse cursor direction) 
+             */
+            Vector3 direction = Camera.main.transform.forward; // 카메라에서 정면을 가리키게 함 (else throw the camera Forward)
+
+
+            bomb.GetComponent<BombController>().Shoot(direction * 1000);
+            // 벡터 넣을 때 방향은 정해져 있지만, 벡터의 길이 = 힘을 정해줘야함 Shoot을 
+
+        }
     }
     private void Move()
     {
@@ -91,22 +113,7 @@ public class HumanController : MonoBehaviour
             // transform.Translate(transform.right * Time.deltaTime);
         }
     }
-    
-        public void Shoot(Vector3 dir)
-    {
-        GetComponent<Rigidbody>().AddForce(dir);
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.name);
-        if (collision.gameObject.name == "wall")
-        {
-            GetComponent<Rigidbody>().isKinematic = true;
 
-            Destroy(collision.gameObject);
-            //원 OnCollisionEnter의 메소드 오버라이딩 하는 방식임 
-            //Rigidbody 자체가 갖고 있는 것 
-            GetComponent<ParticleSystem>().Play();
-        }
-    }
+
+
 }
