@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
-    
+    public GameObject particle;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +28,10 @@ public class BombController : MonoBehaviour
             GetComponent<Rigidbody>().isKinematic = true;
 
             Destroy(collision.gameObject);
-            //ì› OnCollisionEnterì˜ ë©”ì†Œë“œ ì˜¤ë²„ë¼ì´ë”© í•˜ëŠ” ë°©ì‹ì„ 
-            //Rigidbody ìì²´ê°€ ê°–ê³  ìˆëŠ” ê²ƒ 
+            //¿ø OnCollisionEnterÀÇ ¸Ş¼Òµå ¿À¹ö¶óÀÌµù ÇÏ´Â ¹æ½ÄÀÓ 
+            //Rigidbody ÀÚÃ¼°¡ °®°í ÀÖ´Â °Í 
+            GameObject p = Instantiate(particle);
+            p.transform.position = gameObject.transform.position;
             Destroy(gameObject);
             GetComponent<ParticleSystem>().Play();
         }

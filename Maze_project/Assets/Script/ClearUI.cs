@@ -22,6 +22,6 @@ public class ClearUI : MonoBehaviour
     {
         score.GetComponent<TextMeshProUGUI>().text = "Score : " + GameDirector.point.ToString();
         time.GetComponent<TextMeshProUGUI>().text = "Time : " + GameDirector.time.ToString();
-        bombHit.GetComponent<TextMeshProUGUI>().text = "Bomb Hit : " + GameDirector.point.ToString();
+        bombHit.GetComponent<TextMeshProUGUI>().text = "Bomb Hit : " + GameDirector.countBomb.ToString();
     }
 }

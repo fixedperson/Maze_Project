@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HumanController : MonoBehaviour
@@ -15,11 +16,14 @@ public class HumanController : MonoBehaviour
     private float cameraRotation;
     private Rigidbody rigidbody;
     public GameObject bombPrefab;
+    public GameObject director;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        director = GameObject.Find("GameDirector");
+        
     }
 
     // Update is called once per frame
@@ -34,6 +38,7 @@ public class HumanController : MonoBehaviour
         {
 
             Debug.Log("Launch the bomb");
+            director.GetComponent<GameDirector>().DesPoint();
             GameObject bomb = Instantiate(bombPrefab);
             bomb.transform.position = Camera.main.transform.position + Camera.main.transform.forward * 1.0f ;
             
@@ -114,6 +119,19 @@ public class HumanController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider collision)
+    {
+        Debug.Log("enter");
+        if (collision.gameObject.tag == "end")
+        {
+            GameDirector.point = GameDirector.point - (int)(GameDirector.time * 10.0f);
+            SceneManager.LoadScene("ClearScene");
+        }
+        else
+        {
+            Debug.Log(collision.gameObject.name);
+        }
+    }
 
 
 }

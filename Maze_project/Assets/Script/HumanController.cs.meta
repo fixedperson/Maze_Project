@@ -3,7 +3,9 @@ guid: 476af1c086f008242bb490e4f8278b63
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - theCamera: {instanceID: 0}
+  - bombPrefab: {fileID: 3484700781776868665, guid: 7907f6de23b5960418950e518ac035fc, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
