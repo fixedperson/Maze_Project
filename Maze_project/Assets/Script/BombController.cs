@@ -22,9 +22,9 @@ public class BombController : MonoBehaviour
             /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Vector3 direction = ray.direction;
             */
-            Vector3 direction = Camera.main.transform.forward; // Ä«¸Ş¶ó¿¡¼­ Á¤¸éÀ» °¡¸®Å°°Ô ÇÔ
+            Vector3 direction = Camera.main.transform.forward; // ì¹´ë©”ë¼ì—ì„œ ì •ë©´ì„ ê°€ë¦¬í‚¤ê²Œ í•¨
             bomb.GetComponent<HumanController>().Shoot(direction * 1000);
-            // º¤ÅÍ ³ÖÀ» ¶§ ¹æÇâÀº Á¤ÇØÁ® ÀÖÁö¸¸, º¤ÅÍÀÇ ±æÀÌ = ÈûÀ» Á¤ÇØÁà¾ßÇÔ ShootÀ» 
+            // ë²¡í„° ë„£ì„ ë•Œ ë°©í–¥ì€ ì •í•´ì ¸ ìˆì§€ë§Œ, ë²¡í„°ì˜ ê¸¸ì´ = í˜ì„ ì •í•´ì¤˜ì•¼í•¨ Shootì„ 
 
         }
 
