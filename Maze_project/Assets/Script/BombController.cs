@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BombController : MonoBehaviour
 {
-    public GameObject bombPrefab;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,19 +14,24 @@ public class BombController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+
+    }
+    public void Shoot(Vector3 dir)
+    {
+        GetComponent<Rigidbody>().AddForce(dir);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(collision.gameObject.tag);
+        if (collision.gameObject.tag == "wall")
         {
-            Debug.Log("Launch the bomb");
-            GameObject bomb = Instantiate(bombPrefab);
-            bomb.transform.position = Camera.main.transform.position;
-            /*Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            Vector3 direction = ray.direction;
-            */
-            Vector3 direction = Camera.main.transform.forward; // Ä«¸Ş¶ó¿¡¼­ Á¤¸éÀ» °¡¸®Å°°Ô ÇÔ
-            bomb.GetComponent<HumanController>().Shoot(direction * 1000);
-            // º¤ÅÍ ³ÖÀ» ¶§ ¹æÇâÀº Á¤ÇØÁ® ÀÖÁö¸¸, º¤ÅÍÀÇ ±æÀÌ = ÈûÀ» Á¤ÇØÁà¾ßÇÔ ShootÀ» 
+            GetComponent<Rigidbody>().isKinematic = true;
 
+            Destroy(collision.gameObject);
+            //ì› OnCollisionEnterì˜ ë©”ì†Œë“œ ì˜¤ë²„ë¼ì´ë”© í•˜ëŠ” ë°©ì‹ì„ 
+            //Rigidbody ìì²´ê°€ ê°–ê³  ìˆëŠ” ê²ƒ 
+            Destroy(gameObject);
+            GetComponent<ParticleSystem>().Play();
         }
-
     }
 }
